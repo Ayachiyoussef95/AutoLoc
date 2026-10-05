@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Table(name = "vehicule")
@@ -39,4 +40,26 @@ public class Vehicule {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
     private StatutVehicule statut;
+
+    // Association : Vehicule N ---- 1 Agence
+    @ManyToOne
+    @JoinColumn(name = "id_agence", nullable = false)
+    private agence agence;
+
+    // Association : Vehicule 1 ---- N Maintenance
+    @OneToMany(mappedBy = "vehicule")
+    private List<maintenance> maintenances;
+
+    // Association : Vehicule N ---- N Equipement
+    @ManyToMany
+    @JoinTable(
+            name = "vehicule_equipement",
+            joinColumns = @JoinColumn(name = "id_vehicule"),
+            inverseJoinColumns = @JoinColumn(name = "id_equipement")
+    )
+    private List<equipement> equipements;
+
+    // Association : Vehicule 1 ---- N Reservation
+    @OneToMany(mappedBy = "vehicule")
+    private List<reservation> reservations;
 }

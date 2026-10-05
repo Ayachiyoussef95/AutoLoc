@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "contrat")
@@ -29,4 +30,8 @@ public class contrat {
 
     @Column(nullable = false)
     private boolean valide;
+
+    // Association : Contrat 1 ---- N Paiements
+    @OneToMany(mappedBy = "contrat")
+    private List<paiement> paiements;
 }

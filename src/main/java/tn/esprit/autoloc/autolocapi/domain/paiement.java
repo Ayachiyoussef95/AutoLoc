@@ -1,6 +1,5 @@
 package tn.esprit.autoloc.autolocapi.domain;
 
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -31,4 +30,9 @@ public class paiement {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
     private modepaiement modePaiement;
+
+    // Association : Paiement N ---- 1 Contrat
+    @ManyToOne
+    @JoinColumn(name = "id_contrat", nullable = false)
+    private contrat contrat;
 }

@@ -1,6 +1,5 @@
 package tn.esprit.autoloc.autolocapi.domain;
 
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -30,4 +29,19 @@ public class reservation {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
     private statutreservation statut;
+
+    // Association : Reservation N ---- 1 Client
+    @ManyToOne
+    @JoinColumn(name = "id_client", nullable = false)
+    private client client;
+
+    // Association : Reservation N ---- 1 Vehicule
+    @ManyToOne
+    @JoinColumn(name = "id_vehicule", nullable = false)
+    private Vehicule vehicule;
+
+    // Association : Reservation 1 ---- 1 Contrat
+    @OneToOne
+    @JoinColumn(name = "id_contrat", unique = true)
+    private contrat contrat;
 }

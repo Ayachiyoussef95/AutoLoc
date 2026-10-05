@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "client")
@@ -37,4 +38,8 @@ public class client {
 
     @Column(nullable = false)
     private LocalDate dateInscription;
+
+    // Association : Client 1 ---- N Reservation
+    @OneToMany(mappedBy = "client")
+    private List<reservation> reservations;
 }
